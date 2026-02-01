@@ -10,13 +10,25 @@
 #define UART_RX_PIN 1
 
 #define MSG_MAX_SIZE 32
+#define BUFFER_LEN 8
+#define TERMINATE_CHAR 255
+
 
 enum MSG_SEVERITY {
 	NORMAL,
 	ERROR,
 };
+enum STATUS_FLAGS {
+	NONE,
+	VALID_PACKET,
+	INCOMPLETE_PACKET,
+};
+
 
 void init_uart();
 void send_msg(char name[MSG_MAX_SIZE], enum MSG_SEVERITY);
+char* get_received_buffer();
+void on_uart_rx();
+enum STATUS_FLAGS handle_status_flag();
 
 #endif
